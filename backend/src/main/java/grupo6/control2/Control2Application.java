@@ -8,6 +8,14 @@ public class Control2Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Control2Application.class, args);
+
+		helloWorld();
 	}
 
+		public static void helloWorld(){
+			System.out.println("Control2 está funcionando correctamente.");
+		}
+
 }
+
+
