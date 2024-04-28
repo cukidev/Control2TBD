@@ -4,8 +4,8 @@ public class LoginForm {
     private String user;
     private String password;
 
-    public LoginForm(String email, String password) {
-        this.user = email;
+    public LoginForm(String user, String password) {
+        this.user = user;
         this.password = password;
     }
 

@@ -15,3 +15,14 @@ CREATE TABLE Tasks (
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
+
+-- Notificaciones
+CREATE TABLE Notifications (
+    id SERIAL PRIMARY KEY,
+    user_id INT,
+    task_id INT,
+    message VARCHAR(255),
+    notification_date TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES Users(user_id),
+    FOREIGN KEY (task_id) REFERENCES Tasks(task_id)
+);

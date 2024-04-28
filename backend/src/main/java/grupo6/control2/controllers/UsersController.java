@@ -35,8 +35,6 @@ public class UsersController {
         return userService.updateUser(user);
     }
 
-
-
     @DeleteMapping("/{id}")
     public boolean deleteUser(@PathVariable Long id) throws Exception {
         return userService.deleteUser(id);
