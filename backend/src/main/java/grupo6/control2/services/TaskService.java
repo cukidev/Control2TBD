@@ -38,4 +38,12 @@ public class TaskService {
             throw new Exception(e.getMessage());
         }
     }
+
+    public List<TaskEntity> getTasksByStatus(String status) {
+        return taskRepository.getTasksByStatus(status);
+    }
+
+    public List<TaskEntity> getTasksByKeyword(String keyword) {
+        return taskRepository.searchTasksByKeyword(keyword);
+    }
 }

@@ -39,4 +39,14 @@ public class TaskController {
     public boolean deleteTask(@PathVariable Long id) throws Exception {
         return taskService.deleteTask(id);
     }
+
+    @GetMapping("/{status}")
+    public List<TaskEntity> getTasksByStatus(@PathVariable String status) {
+        return taskService.getTasksByStatus(status);
+    }
+
+    @GetMapping("/{keyword}")
+    public List<TaskEntity> getTasksByKeyword(@PathVariable String keyword) {
+        return taskService.getTasksByKeyword(keyword);
+    }
 }

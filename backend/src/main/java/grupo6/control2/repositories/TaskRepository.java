@@ -29,4 +29,15 @@ public interface TaskRepository extends JpaRepository<TaskEntity,Long> {
     @Modifying
     @Query(value = "DELETE FROM tasks WHERE id = :id", nativeQuery = true)
     void deleteByIdCustom(@Param("id") Long id);
+
+    @Query(value = "SELECT * FROM tasks WHERE status = :status", nativeQuery = true)
+    List<TaskEntity> getTasksByStatus(@Param("status") String status);
+
+    //TA MEDIA DEFECTUOSA
+    @Query(value = "SELECT * FROM tasks WHERE title " +
+            "LIKE %:keyword% OR " +
+            "description LIKE %:keyword%", nativeQuery = true)
+    List<TaskEntity> searchTasksByKeyword(@Param("keyword") String keyword);
+
+
 }
