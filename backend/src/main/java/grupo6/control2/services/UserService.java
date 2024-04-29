@@ -39,14 +39,14 @@ public class UserService {
     public Login login(LoginForm form) {
         UserEntity vol = userRepository.getUserByUsername(form.getUser());
         if (vol == null) {
-            return new Login(false, null);
+            return new Login(false, null,0L);
         }
         if (!form.getPassword().equals(vol.getPassword())) {
-            return new Login(false, null);
+            return new Login(false, null,0L);
         }
-
+        Long id=vol.getId();
         String jwt = JWT.generateToken(form);
-        return new Login(true, jwt);
+        return new Login(true, jwt,vol.getId());
     }
 
     public LoginForm testJWT(String token) {

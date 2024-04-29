@@ -5,9 +5,11 @@ public class Login {
     private boolean success;
     private String jwt;
 
-    public Login(boolean success, String jwt) {
+    private Long id_usuario;
+    public Login(boolean success, String jwt,Long id_usuario) {
         this.success = success;
         this.jwt = jwt;
+        this.id_usuario=id_usuario;
     }
 
     public boolean isSuccess() {
