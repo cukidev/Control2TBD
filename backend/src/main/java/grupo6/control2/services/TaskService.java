@@ -2,6 +2,7 @@ package grupo6.control2.services;
 import grupo6.control2.entities.TaskEntity;
 import grupo6.control2.entities.UserEntity;
 import grupo6.control2.repositories.TaskRepository;
+import grupo6.control2.responses.AddTaskResponse;
 import grupo6.control2.responses.RegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,12 +23,12 @@ public class TaskService {
         return taskRepository.getTaskById(id);
     }
 
-    public void saveTask(TaskEntity task) {
+    public AddTaskResponse saveTask(TaskEntity task) {
         try {
             taskRepository.saveTaskCustom(task.getTitle(),task.getDescription(),task.getDue_date(),task.getStatus(),task.getUserId());
-            return;
+            return new AddTaskResponse(true);
         } catch (Exception e) {
-            return;
+            return new AddTaskResponse(false);
         }
 
     }

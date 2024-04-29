@@ -1,6 +1,7 @@
 package grupo6.control2.controllers;
 
 import grupo6.control2.entities.TaskEntity;
+import grupo6.control2.responses.AddTaskResponse;
 import grupo6.control2.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,9 +16,9 @@ public class TaskController {
     TaskService taskService;
 
     @PostMapping("/tasks/save")
-    public void createTask(@RequestBody TaskEntity task) {
-        taskService.saveTask(task);
-        return;
+    public AddTaskResponse createTask(@RequestBody TaskEntity task) {
+        return taskService.saveTask(task);
+
     }
 
     @GetMapping("/tasks/getAll")
