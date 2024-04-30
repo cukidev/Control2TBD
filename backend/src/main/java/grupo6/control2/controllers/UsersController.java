@@ -1,6 +1,8 @@
 package grupo6.control2.controllers;
 
 import grupo6.control2.entities.UserEntity;
+import grupo6.control2.forms.LoginForm;
+import grupo6.control2.responses.Login;
 import grupo6.control2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,12 @@ public class UsersController {
         return userService.getUserById(id);
     }
 
+    @GetMapping("/{username}")
+    public UserEntity getUserByUsername(@PathVariable String username) {
+        return userService.getByUsername(username);
+    }
+
+
     @PutMapping("/")
     public UserEntity updateUser(@RequestBody UserEntity user) {
         return userService.updateUser(user);
@@ -39,5 +47,11 @@ public class UsersController {
     public boolean deleteUser(@PathVariable Long id) throws Exception {
         return userService.deleteUser(id);
     }
+
+    @PostMapping("/voluntarios/login")
+    public Login login(@RequestBody LoginForm form){
+        return userService.login(form);
+    }
+
 
 }

@@ -1,9 +1,14 @@
 package grupo6.control2.services;
 
 import grupo6.control2.entities.UserEntity;
+import grupo6.control2.forms.LoginForm;
 import grupo6.control2.repositories.UserRepository;
+import grupo6.control2.repositories.JWTMiddlewareRepository;
+import grupo6.control2.responses.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Qualifier;
+
 
 import java.util.List;
 
@@ -11,7 +16,11 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    @Qualifier("JWTMiddlewareRepositoryImp")
+    private JWTMiddlewareRepository JWT;
 
     public List<UserEntity> getUsers() {
         return userRepository.getAll();
@@ -20,6 +29,31 @@ public class UserService {
     public UserEntity getUserById(Long id) {
         return userRepository.getUserById(id);
     }
+
+    public UserEntity getByUsername(String username){
+        return userRepository.getUserByUsername(username);
+    }
+
+    public Login login(LoginForm form) {
+        UserEntity vol = userRepository.getUserByUsername(form.getUser());
+        if (vol == null) {
+            return new Login(false, null);
+        }
+        if (!form.getPassword().equals(vol.getPassword())) {
+            return new Login(false, null);
+        }
+
+        String jwt = JWT.generateToken(form);
+        return new Login(true, jwt);
+    }
+
+    public LoginForm testJWT(String token) {
+        if (JWT.validateToken(token)) {
+            return JWT.decodeJWT(token);
+        }
+        return null;
+    }
+
 
     public UserEntity saveUser(UserEntity user) {
         return userRepository.saveUserCustom(user.getUsername(),user.getPassword());

@@ -18,6 +18,9 @@ public interface UserRepository extends JpaRepository<UserEntity,Long> {
     @Query(value = "SELECT * FROM users WHERE users.id=:id ", nativeQuery = true)
     UserEntity getUserById(@Param("id") Long id);
 
+    @Query(value = "SELECT * FROM users WHERE users.username=:username ", nativeQuery = true)
+    UserEntity getUserByUsername(@Param("username") String username);
+
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO users (username, password) VALUES (:username, :password)", nativeQuery = true)

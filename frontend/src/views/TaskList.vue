@@ -48,9 +48,6 @@ onMounted(async () => {
   await fetchTasks();
 });
 
-/*
-
-No sé pq el const response = await axios.get('/api/tasks'); me genera un bucle
 
 const fetchTasks = async () => {
   try {
@@ -60,19 +57,6 @@ const fetchTasks = async () => {
     console.error('Error fetching tasks:', error);
   }
 };
-
-Así que dejé datos de prueba para visualizarlo
-
-*/
-
-
-const fetchTasks = async () => {
-  tasks.value = [
-    { id: 1, title: "Tarea 1", description: "Descripción de la tarea 1", due_date: "2024-01-01" },
-    { id: 2, title: "Tarea 2", description: "Descripción de la tarea 2", due_date: "2024-01-02" },
-  ];
-};
-
 
 
 const deleteTask = async (taskId) => {
