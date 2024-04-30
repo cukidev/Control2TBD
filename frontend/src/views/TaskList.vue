@@ -51,7 +51,8 @@ onMounted(async () => {
 
 const fetchTasks = async () => {
   try {
-    const response = await axios.get('/api/tasks');
+    const response = await axios.get("http://localhost:8090/users/tasks");
+    console.log("Tareas recibidas:", response.data);
     tasks.value = response.data;
   } catch (error) {
     console.error('Error fetching tasks:', error);

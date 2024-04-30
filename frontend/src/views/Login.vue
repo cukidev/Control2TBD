@@ -20,6 +20,7 @@
 
 <script setup>
   import logo from '@/assets/logo.png';
+  import { useRouter } from 'vue-router';
   import axios from 'axios';
   import { ref } from 'vue';
 
@@ -27,6 +28,7 @@
 
   const user = ref("");
   const password = ref("");
+  const router = useRouter();
 
   const sendForm = async () => {
     if (user.value.trim() === "") {
@@ -45,13 +47,15 @@
     };
 
     try {
-      const response = await axios.post("http://localhost:8090/users/login", body);
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error during login attempt:', error);
-      window.alert('Error al iniciar sesión. Por favor, intente nuevamente.');
-    }
+    const response = await axios.post("http://localhost:8090/users/login", body);
+    localStorage.setItem('userToken', response.data.jwt);
+    localStorage.setItem('userId', response.data.userId);
+    router.push('/tasks');
+  } catch (error) {
+    console.error('Error during login attempt:', error);
+    window.alert('Error al iniciar sesión. Por favor, intente nuevamente.');
   }
+}
 </script>
 
 <style scoped>

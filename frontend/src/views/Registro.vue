@@ -19,11 +19,13 @@
 import axios from 'axios';
 import { ref } from 'vue';
 import logo from '@/assets/logo.png';
+import { useRouter } from 'vue-router';
 
 const user = ref("");
 const password = ref("");
 const exito = ref(false);
 const mensajeExito = 'Usuario registrado exitosamente';
+const router = useRouter();
 
 const sendForm = async () => {
   if (user.value.trim() === "") {
@@ -44,9 +46,11 @@ const sendForm = async () => {
   try {
     const response = await axios.post("http://localhost:8090/users/save", body);
     exito.value = true;
+    console.log(response.data);
+    router.push('/login');
+
   } catch (error) {
     console.error('Error durante el intento de registro:', error);
-    window.alert('Error al registrarse. Por favor, intente nuevamente.');
   }
 };
 </script>

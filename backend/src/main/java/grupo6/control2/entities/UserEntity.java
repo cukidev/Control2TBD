@@ -12,6 +12,8 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEntity {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
