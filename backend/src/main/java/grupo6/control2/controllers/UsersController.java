@@ -3,6 +3,7 @@ package grupo6.control2.controllers;
 import grupo6.control2.entities.UserEntity;
 import grupo6.control2.forms.LoginForm;
 import grupo6.control2.responses.Login;
+import grupo6.control2.responses.RegisterResponse;
 import grupo6.control2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,7 @@ public class UsersController {
     UserService userService;
 
     @PostMapping("/users/save")
-    public UserEntity createUser(@RequestBody UserEntity user) {
+    public RegisterResponse createUser(@RequestBody UserEntity user) {
         return userService.saveUser(user);
     }
 
@@ -36,10 +37,10 @@ public class UsersController {
         return userService.getByUsername(username);
     }
 
-    @PutMapping("/")
-    public UserEntity updateUser(@RequestBody UserEntity user) {
-        return userService.updateUser(user);
-    }
+//    @PutMapping("/")
+//    public UserEntity updateUser(@RequestBody UserEntity user) {
+//        return userService.updateUser(user);
+//    }
 
     @DeleteMapping("/{id}")
     public boolean deleteUser(@PathVariable Long id) throws Exception {
@@ -48,6 +49,7 @@ public class UsersController {
 
     @PostMapping("/users/login")
     public Login login(@RequestBody LoginForm form){
+        System.out.println(form.getUser());
         return userService.login(form);
     }
 

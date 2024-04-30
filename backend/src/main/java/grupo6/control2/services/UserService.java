@@ -5,6 +5,7 @@ import grupo6.control2.forms.LoginForm;
 import grupo6.control2.repositories.UserRepository;
 import grupo6.control2.repositories.JWTMiddlewareRepository;
 import grupo6.control2.responses.Login;
+import grupo6.control2.responses.RegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -53,14 +54,20 @@ public class UserService {
         }
         return null;
     }
-    public UserEntity saveUser(UserEntity user) {
-        return userRepository.saveUserCustom(user.getUsername(),user.getPassword());
+    public RegisterResponse saveUser(UserEntity user) {
+        try {
+            userRepository.saveUserCustom(user.getUsername(),user.getPassword());
+            return new RegisterResponse(true);
+        } catch (Exception e) {
+            return new RegisterResponse(false);
+        }
+
     }
 
-    public UserEntity updateUser(UserEntity user) {
-        return userRepository.saveUserCustom(user.getUsername(),user.getPassword());
-
-    }
+//    public void updateUser(UserEntity user) {
+//        userRepository.saveUserCustom(user.getUsername(),user.getPassword());
+//
+//    }
     public boolean deleteUser(Long id) throws Exception {
         try {
             userRepository.deleteByIdCustom(id);
