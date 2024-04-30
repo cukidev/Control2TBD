@@ -5,7 +5,7 @@
     </div>
     <div class="content">
       <div class="form">
-        <h1>Task hueón del hoyo</h1>
+        <h1>Task Manager</h1>
         <input placeholder="Nombre de usuario" type="text" v-model="user" class="input">
         <input placeholder="Contraseña" type="password" v-model="password" class="input">
         <button @click="sendForm" class="button">Registrarse</button>
@@ -20,8 +20,8 @@ import axios from 'axios';
 import { ref } from 'vue';
 import logo from '@/assets/logo.png';
 
-const user = ref('');
-const password = ref('');
+const user = ref("");
+const password = ref("");
 const exito = ref(false);
 const mensajeExito = 'Usuario registrado exitosamente';
 
@@ -42,7 +42,7 @@ const sendForm = async () => {
   };
 
   try {
-    const response = await axios.post("http://localhost:8090/control/register", body);
+    const response = await axios.post("http://localhost:8090/users/save", body);
     exito.value = true;
   } catch (error) {
     console.error('Error durante el intento de registro:', error);

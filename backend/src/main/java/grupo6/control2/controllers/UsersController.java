@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/users")
 @CrossOrigin("*")
 public class UsersController {
 
     @Autowired
     UserService userService;
 
-    @GetMapping("/")
+    @PostMapping("/users/save")
     public UserEntity createUser(@RequestBody UserEntity user) {
         return userService.saveUser(user);
     }
@@ -37,7 +36,6 @@ public class UsersController {
         return userService.getByUsername(username);
     }
 
-
     @PutMapping("/")
     public UserEntity updateUser(@RequestBody UserEntity user) {
         return userService.updateUser(user);
@@ -48,7 +46,7 @@ public class UsersController {
         return userService.deleteUser(id);
     }
 
-    @PostMapping("/voluntarios/login")
+    @PostMapping("/users/login")
     public Login login(@RequestBody LoginForm form){
         return userService.login(form);
     }

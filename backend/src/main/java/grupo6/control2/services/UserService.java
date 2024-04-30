@@ -53,8 +53,6 @@ public class UserService {
         }
         return null;
     }
-
-
     public UserEntity saveUser(UserEntity user) {
         return userRepository.saveUserCustom(user.getUsername(),user.getPassword());
     }
@@ -63,7 +61,6 @@ public class UserService {
         return userRepository.saveUserCustom(user.getUsername(),user.getPassword());
 
     }
-
     public boolean deleteUser(Long id) throws Exception {
         try {
             userRepository.deleteByIdCustom(id);

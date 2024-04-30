@@ -5,7 +5,7 @@
     </div>
     <div class="content">
       <div class="form">
-        <h1>Task hueón del hoyo</h1>
+        <h1>Task Manager</h1>
       </div>
       <div>
       </div>
@@ -45,7 +45,7 @@
     };
 
     try {
-      const response = await axios.post("http://localhost:8090/login", body);
+      const response = await axios.post("http://localhost:8090/users/login", body);
       console.log(response.data);
     } catch (error) {
       console.error('Error during login attempt:', error);

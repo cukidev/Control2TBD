@@ -2,7 +2,7 @@
   <main>
     <div class="welcome-container">
       <img src="@/assets/logo.png" alt="Logo" class="logo" />
-      <h1>Bienvenido a Task hueón del hoyo</h1>
+      <h1>Bienvenido a Task Manager</h1>
       <p>La plataforma líder en gestión de tareas y productividad.</p>
       <div class="buttons-container">
         <router-link to="/login">
