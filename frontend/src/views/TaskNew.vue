@@ -33,13 +33,15 @@
   
   const createTask = async () => {
     try {
-      await axios.post('/api/tasks', newTask.value);
+      await axios.post('http://localhost:8090/tasks/save', newTask.value);
       newTask.value = { title: '', description: '', due_date: '' };
       router.push('/tasks');
     } catch (error) {
       console.error('Error creating task:', error);
+      alert('Error al crear la tarea. Por favor, intente nuevamente.');
     }
   };
+
   </script>
   
   <style scoped>

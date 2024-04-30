@@ -8,34 +8,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/tasks")
 @CrossOrigin("*")
 public class TaskController {
 
     @Autowired
     TaskService taskService;
 
-    @GetMapping("/")
-    public TaskEntity createTask(@RequestBody TaskEntity task) {
-        return taskService.saveTask(task);
+    @PostMapping("/tasks/save")
+    public void createTask(@RequestBody TaskEntity task) {
+        taskService.saveTask(task);
+        return;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/tasks/getAll")
     public List<TaskEntity> getTasks() {
         return taskService.getTasks();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/tasks/{id}")
     public TaskEntity getTaskById(@PathVariable Long id) {
         return taskService.getTaskById(id);
     }
 
-    @PutMapping("/")
+    /*
+    @PutMapping("/tasks/update")
     public TaskEntity updateTask(@RequestBody TaskEntity task) {
         return taskService.updateTask(task);
     }
-
-    @DeleteMapping("/{id}")
+*/
+    @DeleteMapping("/tasks/{id}")
     public boolean deleteTask(@PathVariable Long id) throws Exception {
         return taskService.deleteTask(id);
     }

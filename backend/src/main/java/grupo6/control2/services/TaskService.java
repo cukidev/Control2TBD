@@ -1,6 +1,8 @@
 package grupo6.control2.services;
 import grupo6.control2.entities.TaskEntity;
+import grupo6.control2.entities.UserEntity;
 import grupo6.control2.repositories.TaskRepository;
+import grupo6.control2.responses.RegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,16 +22,21 @@ public class TaskService {
         return taskRepository.getTaskById(id);
     }
 
-    public TaskEntity saveTask(TaskEntity task) {
+    public void saveTask(TaskEntity task) {
+        try {
+            taskRepository.saveTaskCustom(task.getTitle(),task.getDescription(),task.getDue_date(),task.getStatus(),task.getUserId());
+            return;
+        } catch (Exception e) {
+            return;
+        }
 
-        return taskRepository.saveTaskCustom(task.getTitle(),task.getDescription(),task.getDue_date(),task.getStatus(),task.getUserId());
     }
-
+ /*
     public TaskEntity updateTask(TaskEntity task) {
 
         return taskRepository.saveTaskCustom(task.getTitle(),task.getDescription(),task.getDue_date(),task.getStatus(),task.getUserId());
     }
-
+*/
     public boolean deleteTask(Long id) throws Exception {
         try {
             taskRepository.deleteByIdCustom(id);

@@ -37,7 +37,7 @@ const sendForm = async () => {
   }
 
   const body = {
-    user: user.value,
+    username: user.value,
     password: password.value
   };
 

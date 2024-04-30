@@ -23,7 +23,7 @@ public interface TaskRepository extends JpaRepository<TaskEntity,Long> {
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO tasks (title, description, due_date, status, user_id) VALUES (:title, :description, :due_date, :status, :user_id)", nativeQuery = true)
-    TaskEntity saveTaskCustom(@Param("title") String title, @Param("description") String description, @Param("due_date") Date due_date, @Param("status") String status, @Param("user_id") Long user_id);
+    void saveTaskCustom(@Param("title") String title, @Param("description") String description, @Param("due_date") Date due_date, @Param("status") String status, @Param("user_id") Long user_id);
 
     @Transactional
     @Modifying
@@ -35,8 +35,8 @@ public interface TaskRepository extends JpaRepository<TaskEntity,Long> {
 
     //TA MEDIA DEFECTUOSA
     @Query(value = "SELECT * FROM tasks WHERE title " +
-            "LIKE %:keyword% OR " +
-            "description LIKE %:keyword%", nativeQuery = true)
+            "LIKE '% :keyword %' OR " +
+            "description LIKE '%:keyword%'", nativeQuery = true)
     List<TaskEntity> searchTasksByKeyword(@Param("keyword") String keyword);
 
 

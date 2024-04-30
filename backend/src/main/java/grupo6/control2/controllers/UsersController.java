@@ -6,6 +6,7 @@ import grupo6.control2.responses.Login;
 import grupo6.control2.responses.RegisterResponse;
 import grupo6.control2.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,10 +38,20 @@ public class UsersController {
         return userService.getByUsername(username);
     }
 
-//    @PutMapping("/")
-//    public UserEntity updateUser(@RequestBody UserEntity user) {
-//        return userService.updateUser(user);
-//    }
+    /*
+    @PutMapping("/{id}")
+    public UserEntity updateUser(@PathVariable Long id){
+        try {
+            user.setId(id);
+            UserEntity updatedUser = userService.updateUser(user);
+            return ResponseEntity.ok(updatedUser);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+
+    }
+
+     */
 
     @DeleteMapping("/{id}")
     public boolean deleteUser(@PathVariable Long id) throws Exception {

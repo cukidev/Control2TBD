@@ -9,6 +9,7 @@ import grupo6.control2.responses.RegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class UserService {
         return userRepository.getUserById(id);
     }
 
-    public UserEntity getByUsername(String username){
+    public UserEntity getByUsername(String username) {
         return userRepository.getUserByUsername(username);
     }
 
@@ -54,9 +55,10 @@ public class UserService {
         }
         return null;
     }
+
     public RegisterResponse saveUser(UserEntity user) {
         try {
-            userRepository.saveUserCustom(user.getUsername(),user.getPassword());
+            userRepository.saveUserCustom(user.getUsername(), user.getPassword());
             return new RegisterResponse(true);
         } catch (Exception e) {
             return new RegisterResponse(false);
@@ -64,10 +66,16 @@ public class UserService {
 
     }
 
-//    public void updateUser(UserEntity user) {
-//        userRepository.saveUserCustom(user.getUsername(),user.getPassword());
-//
-//    }
+    public UserEntity updateUser(UserEntity user) {
+        UserEntity existingUser = userRepository.findById(user.getId())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        existingUser.setUsername(user.getUsername());
+        existingUser.setPassword(user.getPassword());
+
+        return userRepository.save(existingUser);
+    }
+
+
     public boolean deleteUser(Long id) throws Exception {
         try {
             userRepository.deleteByIdCustom(id);
@@ -78,3 +86,4 @@ public class UserService {
     }
 
 }
+
